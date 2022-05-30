@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">tfg</string>
+    <string name="Login">Login</string>
+    <string name="Email" translatable="false">Email</string>
+    <string name="Pw">Password</string>
+    <string name="Register">Sign up</string>
+    <string name="Back">Back</string>
+    <string name="Name">Name</string>
+    <string name="Surnames">Surnames</string>
+    <string name="Telf">Phone number</string>
+</resources>
