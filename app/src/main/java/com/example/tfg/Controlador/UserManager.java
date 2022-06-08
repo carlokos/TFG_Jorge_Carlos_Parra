@@ -12,6 +12,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -49,6 +50,12 @@ public class UserManager {
         BD.insert(TABLE_USER, null, registro);
     }
 
+    /**
+     * Método que comprueba si un usuario existe en la base de datos local
+     * @param email
+     * @param pw
+     * @return boolean
+     */
     public boolean Login(String email, String pw){
         boolean log = false;
         Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_USER, null);
@@ -64,13 +71,48 @@ public class UserManager {
         return log;
     }
 
-    public boolean CheckUser(String email){
-        boolean existe = false;
+    public Integer getId(String email){
+        Integer id = -1;
         Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_USER, null);
-        int columna = cursor.getColumnIndex(USER_EMAIL);
+        int colEmail = cursor.getColumnIndex(USER_EMAIL);
+        int colId = cursor.getColumnIndex(USER_ID);
         if(cursor != null && cursor.moveToFirst()){
             do{
-                if(cursor.getString(columna).equals(email)){
+                if(cursor.getString(colEmail).equals(email)){
+                  id = cursor.getInt(colId);
+                }
+            }while(cursor.moveToNext());
+        }
+        return id;
+    }
+
+    public User getUser(Integer id){
+        User u = null;
+        Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_USER, null);
+        int colId = cursor.getColumnIndex(USER_ID);
+        if(cursor != null && cursor.moveToFirst()){
+            do{
+                if(cursor.getInt(colId) == id){
+                    u = new User(id, cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getString(3),
+                            cursor.getString(4),
+                            cursor.getInt(5));
+                }
+            }while(cursor.moveToNext());
+        }
+        return u;
+    }
+
+    public boolean CheckUser(User u){
+        boolean existe = false;
+        Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_USER, null);
+        int colEmail = cursor.getColumnIndex(USER_EMAIL);
+        int colId = cursor.getColumnIndex(USER_ID);
+        if(cursor != null && cursor.moveToFirst()){
+            do{
+                Log.d("ID:", u.getId().toString());
+                if(cursor.getString(colEmail).equals(u.getEmail())){
                     existe = true;
                 }
             } while(cursor.moveToNext());

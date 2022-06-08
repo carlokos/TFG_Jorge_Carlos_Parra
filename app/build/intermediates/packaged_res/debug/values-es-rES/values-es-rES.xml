@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Back">Volver</string>
+    <string name="Confirm">Confirmar</string>
+    <string name="ConfirmR">¿Confirmar reserva?</string>
+    <string name="Date">Fecha de la reserva</string>
+    <string name="Exit">Salir</string>
+    <string name="Hour">Hora</string>
+    <string name="Login">Iniciar Sesion</string>
+    <string name="MyBookings">Mis Reservas</string>
+    <string name="Name">Nombre</string>
+    <string name="Num">Número de personas</string>
+    <string name="Price">Precio</string>
+    <string name="Pw">Contraseña</string>
+    <string name="Register">Registrarse</string>
+    <string name="Reserve">Reservar</string>
+    <string name="Service">Servicio</string>
+    <string name="Surnames">Apellidos</string>
+    <string name="Telf">Número de teléfono</string>
+    <string name="Welcome">Bienvenido</string>
+    <string name="app_name">tfg</string>
+</resources>

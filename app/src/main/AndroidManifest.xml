@@ -14,6 +14,12 @@
         android:theme="@style/Theme.Tfg"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Pantallas.My_Bookings"
+            android:exported="false" />
+        <activity
+            android:name=".Pantallas.Reserve"
+            android:exported="false" />
+        <activity
             android:name=".Pantallas.MainScreen"
             android:exported="false" />
         <activity

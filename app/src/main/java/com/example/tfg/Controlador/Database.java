@@ -22,6 +22,9 @@ public class Database extends SQLiteOpenHelper {
         * a la hora de modificar los datos y que todo este más organizado
         * */
         db.execSQL(Constants.CREAR_TABLA_USERS);
+        db.execSQL(Constants.CREAR_TABLA_PASSES);
+        db.execSQL(Constants.CREAR_TABLA_SERVICES);
+        db.execSQL(Constants.CREAR_TABLA_BOOKINGS);
     }
 
     @Override

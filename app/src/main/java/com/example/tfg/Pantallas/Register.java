@@ -1,9 +1,12 @@
 package com.example.tfg.Pantallas;
 
 import static com.example.tfg.Constants.URL_BASE;
+import static com.example.tfg.Constants.apiManager;
+import static com.example.tfg.Pantallas.Login.UM;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,19 +27,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Se encarga de crear un usuario nuevo y registrarlo en la base de datos, al terminar
+ * vuelve a la pantalla de login
+ */
 public class Register extends AppCompatActivity {
     EditText email, pw, name, subname, telf;
     Button add, back;
 
     private String mail, pass, nom, subnom, tef;
-    private ApiManager apiManager;
-    private UserManager UM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        UM = new UserManager(this);
 
         email = findViewById(R.id.txtAddEmail);
         pw = findViewById(R.id.txtAddPw);
@@ -55,29 +59,20 @@ public class Register extends AppCompatActivity {
                 nom = name.getText().toString();
                 subnom = subname.getText().toString();
                 tef = telf.getText().toString();
-
-                if(AccessNetwork.checkNetworkState(view.getContext())){
-                    if(UM.validateEmail(email)){
-                        if(!pass.isEmpty()
-                            && !nom.isEmpty()
-                            && !subnom.isEmpty()
-                            && !tef.isEmpty()) {
+                if(!pass.isEmpty() && !nom.isEmpty()
+                        && !subnom.isEmpty() && !tef.isEmpty()) {
                             createUser(mail, pass, nom, subnom, Integer.parseInt(tef));
-                        } else{
-                            Toast("Por favor, relleno todos los campos");
-                        }
-                    } else{
-                        Toast("Email introducido incorrectamente, compruebe el correo");
-                    }
                 } else{
-                    // TODO mejorar el toast
-                    Toast("Se necesita acceso a internet");
+                    Toast("Por favor, relleno todos los campos");
                 }
             }
         });
     }
 
     public void createUser(String email, String pw, String name, String subname, int Telf){
+        /*
+            Creamos un usuario sin ID, para que no genere conflicto con la base de datos externa
+         */
         User u = new User();
 
         u.setName(name);
@@ -86,20 +81,13 @@ public class Register extends AppCompatActivity {
         u.setSubname(subname);
         u.setEmail(email);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL_BASE)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        apiManager = retrofit.create(ApiManager.class);
-
         Call<User> call = apiManager.postUser(u);
 
         /**
          * La razon por la que onResponse es donde controlamos la excepcion es porque
-         * cuando da error siempre manda el codigo 500 pero no siempre cuando hace un post
-         * manda el codigo 201 si no que no manda codigo del respond (aunque se haga el metodo
-         * Post correctamente) asi que Retrofit lo envia directamente a onFailure
+         * cuando da error el body del response no esta nulo (ya que devuelve el fallo) y retrofit
+         * lo situa en ese sitio al no ser nulo, mientras que ha postear algo con exito el body
+         * del response es nulo, asi que lo situa en onFailure
          */
         call.enqueue(new Callback<User>() {
             @Override
@@ -112,6 +100,10 @@ public class Register extends AppCompatActivity {
                 Toast("Usuario registrado exitosamente");
             }
         });
+
+        Intent i = new Intent(this, Login.class);
+        startActivity(i);
+        finish();
     }
 
     public void Toast(String msg){

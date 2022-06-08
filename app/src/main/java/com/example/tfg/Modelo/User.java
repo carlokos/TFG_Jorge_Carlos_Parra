@@ -1,6 +1,9 @@
 package com.example.tfg.Modelo;
 
 public class User {
+    //Retrofit a la hora de hacer un post ignora los datos tipo Integer, nos viene bien
+    //ya que nuestro ID es autoicrementar y lo queremos copiar de la base de datos externa
+    //pero no usar el campo a la hora de hacer una llamada con Post
     Integer Id;
     String Name, Subname, Password, Email;
     int Telf;
@@ -17,11 +20,11 @@ public class User {
         Telf = telf;
     }
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 

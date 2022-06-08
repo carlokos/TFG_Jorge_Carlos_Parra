@@ -8,4 +8,15 @@
     <string name="Name">Nombre</string>
     <string name="Surnames">Apellidos</string>
     <string name="Telf">Número de teléfono</string>
+    <string name="Reserve">Reservar</string>
+    <string name="MyBookings">Mis Reservas</string>
+    <string name="Exit">Salir</string>
+    <string name="Date">Fecha de la reserva</string>
+    <string name="Num">Número de personas</string>
+    <string name="Hour">Hora</string>
+    <string name="Price">Precio</string>
+    <string name="Confirm">Confirmar</string>
+    <string name="Service">Servicio</string>
+    <string name="Welcome">Bienvenido</string>
+    <string name="ConfirmR">¿Confirmar reserva?</string>
 </resources>
