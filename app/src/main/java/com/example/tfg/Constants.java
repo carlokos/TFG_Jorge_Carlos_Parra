@@ -8,8 +8,13 @@ import com.example.tfg.Controlador.ApiManager;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Clase donde almacenamos todas las constantes, principalmente la url de la api y los strings
+ * necesarios para crear y manejar la base de datos externa mas comodamente
+ */
 public class Constants {
-    /*URL base para acceder a la base de datos externa
+    /*
+     *  URL base para acceder a la base de datos externa
      *  Esta formada por la IP del ordenador y su puerto
      */
     public static String URL_BASE = "http://192.168.1.139:8000/v1/";

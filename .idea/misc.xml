@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mipc/AndroidStudioProjects/tfg/app/src/main/res/drawable/custom_button.xml" value="0.292" />
+        <entry key="..\:/Users/mipc/AndroidStudioProjects/tfg/app/src/main/res/layout/activity_info.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/mipc/AndroidStudioProjects/tfg/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Users/mipc/AndroidStudioProjects/tfg/app/src/main/res/layout/activity_menu.xml" value="0.358695652173913" />
         <entry key="..\:/Users/mipc/AndroidStudioProjects/tfg/app/src/main/res/layout/activity_my_bookings.xml" value="0.36666666666666664" />

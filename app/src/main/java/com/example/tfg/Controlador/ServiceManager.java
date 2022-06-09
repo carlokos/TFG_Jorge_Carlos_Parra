@@ -21,6 +21,10 @@ public class ServiceManager {
     Database sql;
     SQLiteDatabase BD;
 
+    /**
+     * Controlador que se encarga del la tabla Services en la BD local
+     * @param context
+     */
     public ServiceManager(Context context) {
         this.context = context;
 
@@ -28,6 +32,10 @@ public class ServiceManager {
         BD = sql.getWritableDatabase();
     }
 
+    /**
+     * Registra un servicio en la BD local
+     * @param s
+     */
     public void RegisterService(Services s){
         ContentValues registro = new ContentValues();
 
@@ -38,6 +46,11 @@ public class ServiceManager {
         BD.insert(TABLE_SERVICE, null, registro);
     }
 
+    /**
+     * Comprueba si un servicio existe a traves de un id
+     * @param id
+     * @return boolean
+     */
     public boolean checkService(int id){
         boolean existe = false;
         Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_SERVICE, null);
@@ -52,6 +65,11 @@ public class ServiceManager {
         return existe;
     }
 
+    /**
+     * Devuelve el tipo de servicio a traves de un id
+     * @param id
+     * @return String
+     */
     public String returnType(int id){
         String Type = "";
         Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_SERVICE, null);

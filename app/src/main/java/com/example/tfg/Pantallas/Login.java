@@ -43,18 +43,24 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //solo iniciamos la BD de usuarios
         UM = new UserManager(this);
 
+        //Sincronizamos los elementos de la pantalla
         email = findViewById(R.id.txtEmail);
         pw = findViewById(R.id.txtPassword);
         login = findViewById(R.id.btnLogin);
         signup = findViewById(R.id.btnRegister);
 
+        //Si hay internet sincroniza los datos
         if(AccessNetwork.checkNetworkState(this)) {
             mTask = new publishTask();
             mTask.execute();
         }
 
+        /**
+         * Si el correo y la contraseña son correcto accede al menu principal
+         */
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +76,9 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
-
+        /**
+         * Comprueba si hay internet para el registro de usuario y accede a este
+         */
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +104,7 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
+    //Hacemos la sincronizacion de las BDs en un hilo segundario para no congelar la app
     private class publishTask extends AsyncTask<Void, Void, Void>{
 
         @Override

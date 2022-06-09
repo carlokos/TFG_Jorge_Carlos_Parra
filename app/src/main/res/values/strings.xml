@@ -20,4 +20,9 @@
     <string name="Service">Service</string>
     <string name="Welcome">Welcome</string>
     <string name="ConfirmR">Confirm reserve?</string>
+    <string name="History">History</string>
+    <string name="Contact">Contact</string>
+    <string name="Document">Document</string>
+    <string name="Exit2">Exit?</string>
+    <string name="QExit">Are you sure to log out?</string>
 </resources>

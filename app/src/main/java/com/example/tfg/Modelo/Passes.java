@@ -2,7 +2,6 @@ package com.example.tfg.Modelo;
 
 public class Passes {
     int Id;
-
     String Hour;
 
     public Passes(int id, String hour) {

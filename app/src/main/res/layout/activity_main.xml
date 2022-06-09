@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:layout_editor_absoluteX="1dp">
+    tools:layout_editor_absoluteX="1dp"
+    android:background="@drawable/fondo">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,6 +21,9 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            app:cornerRadius = "70dp"
             android:text="@string/Login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +36,9 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            app:cornerRadius = "70dp"
             android:text="@string/Register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

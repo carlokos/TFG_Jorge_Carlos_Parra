@@ -2,12 +2,12 @@ package com.example.tfg.Controlador;
 
 import static com.example.tfg.Constants.apiManager;
 import static com.example.tfg.Pantallas.MainScreen.BM;
+import static com.example.tfg.Pantallas.MainScreen.PM;
 import static com.example.tfg.Pantallas.MainScreen.SM;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tfg.Modelo.Bookings;
+import com.example.tfg.Modelo.Booking;
 import com.example.tfg.R;
 
 import java.util.List;
@@ -28,10 +28,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Nuestro adapter para el recycler view, esta hecho con el Objeto Booking
+ */
 public class Adapter extends RecyclerView.Adapter<Adapter.RecyclerHolder> {
-    private java.util.List<Bookings> List;
+    private java.util.List<Booking> List;
 
-    public Adapter(List<Bookings> list, Context context){
+    public Adapter(List<Booking> list, Context context){
         this.List = list;
     }
 
@@ -47,7 +50,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.RecyclerHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
         //aqui mostramos nuestro contenido, le pasamos uno por uno los objetos de la lista
-        Bookings b = List.get(position);
+        Booking b = List.get(position);
         holder.getElements(b);
     }
 
@@ -57,28 +60,36 @@ public class Adapter extends RecyclerView.Adapter<Adapter.RecyclerHolder> {
     }
 
     public class RecyclerHolder extends RecyclerView.ViewHolder {
-        //aqui relacionamos los elementos de nuestro "list-element" con las variables
+        //declaramos los elementos del adapter
         ImageView icono;
         TextView servicio, fecha, precio;
-        Button eliminar, pagar;
+        Button eliminar;
 
         public RecyclerHolder(@NonNull View itemView) {
             super(itemView);
-
+            //aqui relacionamos los elementos de nuestro "list-element" con las variables
             icono = itemView.findViewById(R.id.imgIcon);
             servicio = itemView.findViewById(R.id.titleService);
             fecha = itemView.findViewById(R.id.titleDate);
             precio = itemView.findViewById(R.id.titlePrice);
             eliminar = itemView.findViewById(R.id.btnCancel);
-            pagar = itemView.findViewById(R.id.btnPay);
         }
 
-        public void getElements(Bookings b) {
+        public void getElements(Booking b) {
+            /**
+             * Cada tarjeta muestra:
+             * -El nombre de servicio (Ej: Espectáculo + copa)
+             * -La fecha de la reserva y su hora
+             * -El precio de la reserva
+             */
             servicio.setText(SM.returnType(b.getService_Id()));
-            fecha.setText(b.getSession_date());
+            fecha.setText(b.getSession_date() + " / " + PM.returnHour(b.getPass_Id()));
             precio.setText(String.valueOf(b.getPrice()) + "€");
 
-            //listener de un boton
+            /**
+             * Pregunta que si esta seguro que desea borrar la cita,
+             * si acepta y hay conexion a internet entonces la cita es borrada
+             */
             eliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -96,12 +107,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.RecyclerHolder> {
                                             BM.removerReserve(b.getId());
                                             List.remove(b);
                                             notifyDataSetChanged();
-
                                         }
 
                                         @Override
                                         public void onFailure(Call<Void> call, Throwable t) {
-                                            Toast("SIN CONEXION A INTERNET, COMPRUEBE SU CONEXION");
+                                            Toast("No se ha podido cancelar la cita, compruebe su conexión");
                                         }
                                     });
                                 }//aqui
@@ -115,13 +125,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.RecyclerHolder> {
                     AlertDialog titulo = Alerta.create();
                     titulo.setTitle("¿Cancelar Cita?");
                     titulo.show();
-                }
-            });
-
-            pagar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast("EN TEORIA SE PAGA BIEN");
                 }
             });
         }

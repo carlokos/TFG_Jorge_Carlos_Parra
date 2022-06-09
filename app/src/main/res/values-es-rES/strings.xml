@@ -19,4 +19,9 @@
     <string name="Service">Servicio</string>
     <string name="Welcome">Bienvenido</string>
     <string name="ConfirmR">¿Confirmar reserva?</string>
+    <string name="History">Historia</string>
+    <string name="Contact">Contacto</string>
+    <string name="Document">Documentación</string>
+    <string name="Exit2">¿Salir?</string>
+    <string name="QExit">¿Estás seguro que desea salir?</string>
 </resources>

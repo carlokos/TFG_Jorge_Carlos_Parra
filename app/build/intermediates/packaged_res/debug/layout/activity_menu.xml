@@ -42,6 +42,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="68dp"
         android:drawableTop="@drawable/booking"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        app:cornerRadius = "70dp"
         android:text="@string/Reserve"
         app:layout_constraintBottom_toTopOf="@+id/btnInfo"
         app:layout_constraintStart_toStartOf="parent" />
@@ -53,6 +56,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="68dp"
         android:drawableTop="@drawable/info2"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        app:cornerRadius = "70dp"
         android:text="@string/Info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -64,6 +70,9 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="68dp"
         android:drawableTop="@drawable/mybookings"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        app:cornerRadius = "70dp"
         android:text="@string/MyBookings"
         app:layout_constraintBottom_toTopOf="@+id/btnExit"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -75,6 +84,9 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="68dp"
         android:drawableTop="@drawable/exit"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        app:cornerRadius = "70dp"
         android:text="@string/Exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

@@ -27,7 +27,6 @@ id btnExit
 id btnInfo
 id btnLogin
 id btnMyBookings
-id btnPay
 id btnRegister
 id btnVolver
 id cv
@@ -39,12 +38,18 @@ id info
 id rvList
 id spinnerHours
 id spinnerServices
+id textC
+id textD
+id textH
 id titleDate
 id titlePrice
 id titleService
 id tvCoin
+id tvContact
 id tvDate
+id tvDocument
 id tvH
+id tvHistory
 id tvNum
 id tvPass
 id tvPrice
@@ -60,6 +65,7 @@ id txtNumPeople
 id txtPassword
 id txtPrice
 id txtWelcome
+layout activity_info
 layout activity_main
 layout activity_menu
 layout activity_my_bookings
@@ -71,9 +77,13 @@ mipmap ic_launcher_round
 string Back
 string Confirm
 string ConfirmR
+string Contact
 string Date
+string Document
 string Email
 string Exit
+string Exit2
+string History
 string Hour
 string Info
 string Login
@@ -82,6 +92,7 @@ string Name
 string Num
 string Price
 string Pw
+string QExit
 string Register
 string Reserve
 string Service

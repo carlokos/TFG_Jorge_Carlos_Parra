@@ -26,6 +26,10 @@ public class UserManager {
     Database sql;
     SQLiteDatabase BD;
 
+    /**
+     * Controlador que se encarga del la tabla Users en la BD local
+     * @param context
+     */
     public UserManager(Context context){
         this.context = context;
 
@@ -71,6 +75,11 @@ public class UserManager {
         return log;
     }
 
+    /**
+     * Regresa el ID de un usuario pasandole su email
+     * @param email
+     * @return
+     */
     public Integer getId(String email){
         Integer id = -1;
         Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_USER, null);
@@ -86,6 +95,11 @@ public class UserManager {
         return id;
     }
 
+    /**
+     * Pasandole el id, devuelve al usuario entero
+     * @param id
+     * @return u
+     */
     public User getUser(Integer id){
         User u = null;
         Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_USER, null);
@@ -104,11 +118,16 @@ public class UserManager {
         return u;
     }
 
+    /**
+     * Comprueba si un usuario existe a traves de su email, el cual es unico en la BD,
+     * la usamos para sincronizar los datos y asegurarnos de no poner los mismos datos
+     * @param u
+     * @return boolean
+     */
     public boolean CheckUser(User u){
         boolean existe = false;
         Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_USER, null);
         int colEmail = cursor.getColumnIndex(USER_EMAIL);
-        int colId = cursor.getColumnIndex(USER_ID);
         if(cursor != null && cursor.moveToFirst()){
             do{
                 Log.d("ID:", u.getId().toString());
@@ -120,6 +139,11 @@ public class UserManager {
         return existe;
     }
 
+    /**
+     * Método que usamos tanto en el login como en el register para validar el email
+     * @param email
+     * @return boolean
+     */
     public boolean validateEmail(EditText email){
         String input = email.getText().toString();
 

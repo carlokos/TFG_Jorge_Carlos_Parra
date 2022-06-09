@@ -8,14 +8,7 @@ import static com.example.tfg.Constants.BOOKING_PRICE;
 import static com.example.tfg.Constants.BOOKING_SERVICE_ID;
 import static com.example.tfg.Constants.BOOKING_SESSION_DATE;
 import static com.example.tfg.Constants.BOOKING_USER_ID;
-import static com.example.tfg.Constants.PASS_HOUR;
-import static com.example.tfg.Constants.PASS_ID;
 import static com.example.tfg.Constants.TABLE_BOOKING;
-import static com.example.tfg.Constants.TABLE_PASS;
-import static com.example.tfg.Constants.TABLE_USER;
-import static com.example.tfg.Constants.USER_EMAIL;
-import static com.example.tfg.Constants.apiManager;
-import static com.example.tfg.Pantallas.MainScreen.ID;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -23,21 +16,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.tfg.Modelo.Bookings;
-import com.example.tfg.Modelo.Passes;
+import com.example.tfg.Modelo.Booking;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class BookingManager {
     Context context;
     Database sql;
     SQLiteDatabase BD;
 
+    /**
+     * Controlador que se encarga del la tabla Bookings en la BD local
+     * @param context
+     */
     public BookingManager(Context context) {
         this.context = context;
 
@@ -45,7 +36,11 @@ public class BookingManager {
         BD = sql.getWritableDatabase();
     }
 
-    public void RegisterBooking(Bookings b){
+    /**
+     * Registra una reserva en la BD local
+     * @param b
+     */
+    public void RegisterBooking(Booking b){
         ContentValues registro = new ContentValues();
 
         registro.put(BOOKING_ID, b.getId());
@@ -57,11 +52,14 @@ public class BookingManager {
         registro.put(BOOKING_USER_ID, b.getUser_Id());
         registro.put(BOOKING_SERVICE_ID, b.getService_Id());
 
-        Log.d("Y", registro.toString());
-
         BD.insert(TABLE_BOOKING, null, registro);
     }
 
+    /**
+     * Comprueba si una reserva existe a traves de un ID
+     * @param id
+     * @return boolean
+     */
     public boolean CheckBooking(int id){
         boolean existe = false;
         Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_BOOKING, null);
@@ -76,12 +74,18 @@ public class BookingManager {
         return existe;
     }
 
-    public ArrayList<Bookings> listReserves(int id){
-        ArrayList<Bookings> bookings = new ArrayList<Bookings>();
+    /**
+     * Devuelve una array de las reservas de un usuario que identificamos a traves de un ID.
+     * Lo usamos en el RecyclerView
+     * @param id
+     * @return ArrayList<String>
+     */
+    public ArrayList<Booking> listReserves(int id){
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
         Cursor cursor = BD.rawQuery("SELECT * FROM " + TABLE_BOOKING  + " WHERE " + BOOKING_USER_ID + " = " + id, null);
         if(cursor != null && cursor.moveToFirst()){
             do{
-                Bookings b = new Bookings(
+                Booking b = new Booking(
                         cursor.getInt(0),
                         cursor.getInt(1),
                         cursor.getString(2),

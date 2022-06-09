@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //Sincronizamos los elementos de la pantalla
         email = findViewById(R.id.txtAddEmail);
         pw = findViewById(R.id.txtAddPw);
         name = findViewById(R.id.txtAddName);
@@ -51,20 +53,45 @@ public class Register extends AppCompatActivity {
         add = findViewById(R.id.btnAdd);
         back = findViewById(R.id.btnVolver);
 
+        //acccion para registrarse
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //cogemos los datos
                 mail = email.getText().toString();
                 pass = pw.getText().toString();
                 nom = name.getText().toString();
                 subnom = subname.getText().toString();
                 tef = telf.getText().toString();
+
+                /**
+                 * Comprobamos lo siguiente:
+                 * -Si algun campo esta vacio
+                 * -si el email y el telefono esta bien escritos
+                 * -si hay conexion a internet
+                 */
                 if(!pass.isEmpty() && !nom.isEmpty()
-                        && !subnom.isEmpty() && !tef.isEmpty()) {
+                        && !subnom.isEmpty() && !tef.isEmpty() && UM.validateEmail(email)
+                && validateTelf(telf) && AccessNetwork.checkNetworkState(view.getContext())) {
                             createUser(mail, pass, nom, subnom, Integer.parseInt(tef));
-                } else{
+                } else if(!UM.validateEmail(email)){
+                  Toast("El email introducido es incorrecto");
+                } else if(!validateTelf(telf)){
+                    Toast("El telefono introducido es incorrecto");
+                } else if(!AccessNetwork.checkNetworkState(view.getContext())){
+                    Toast("Se necesita conexion a internet para registrarse");
+                }else{
                     Toast("Por favor, relleno todos los campos");
                 }
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), Login.class);
+                startActivity(i);
+                finish();
             }
         });
     }
@@ -81,6 +108,7 @@ public class Register extends AppCompatActivity {
         u.setSubname(subname);
         u.setEmail(email);
 
+        //La BD externa se encarga de poner un ID automatico al usuario
         Call<User> call = apiManager.postUser(u);
 
         /**
@@ -98,12 +126,25 @@ public class Register extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast("Usuario registrado exitosamente");
+                /*Volvemos a la pantalla anterior para forzar la sincronizacion con la base de datos */
+                Intent i = new Intent(Register.this, Login.class);
+                startActivity(i);
+                finish();
             }
         });
 
-        Intent i = new Intent(this, Login.class);
-        startActivity(i);
-        finish();
+
+    }
+
+    //metodo para validar el telefono
+    public boolean validateTelf(EditText telf){
+        String input = telf.getText().toString();
+
+        if(!input.isEmpty() && Patterns.PHONE.matcher(input).matches()){
+            return true;
+        } else{
+            return false;
+        }
     }
 
     public void Toast(String msg){

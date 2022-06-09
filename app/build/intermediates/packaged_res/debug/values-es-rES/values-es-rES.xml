@@ -3,8 +3,12 @@
     <string name="Back">Volver</string>
     <string name="Confirm">Confirmar</string>
     <string name="ConfirmR">¿Confirmar reserva?</string>
+    <string name="Contact">Contacto</string>
     <string name="Date">Fecha de la reserva</string>
+    <string name="Document">Documentación</string>
     <string name="Exit">Salir</string>
+    <string name="Exit2">¿Salir?</string>
+    <string name="History">Historia</string>
     <string name="Hour">Hora</string>
     <string name="Login">Iniciar Sesion</string>
     <string name="MyBookings">Mis Reservas</string>
@@ -12,6 +16,7 @@
     <string name="Num">Número de personas</string>
     <string name="Price">Precio</string>
     <string name="Pw">Contraseña</string>
+    <string name="QExit">¿Estás seguro que desea salir?</string>
     <string name="Register">Registrarse</string>
     <string name="Reserve">Reservar</string>
     <string name="Service">Servicio</string>
