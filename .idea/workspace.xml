@@ -60,12 +60,21 @@
       </list>
     </option>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="D:\Users\mipc\Desktop\Carlos\tfg\key.jks" />
+    <option name="KEY_ALIAS" value="key" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
   <component name="ProjectId" id="29ZPq5HqImme3s7E6WAvN1U7jzV" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ApkExportedModule" value="tfg.app" />
+    <property name="ExportApk.ApkPath" value="C:\Users\mipc\AndroidStudioProjects\tfg\app" />
+    <property name="ExportApk.BuildVariants" value="release" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
