@@ -1,5 +1,5 @@
 # TFG_Jorge_Carlos_Parra
-Trabajo de fin de grado de Jroge Carlos Parra, cuenta con las siguiente partes
+Trabajo de fin de grado de Jorge Carlos Parra, cuenta con las siguiente partes
 <h3>Pantalla de Login</h3>
 Una pantalla de Login de usuarios, se encargar de registrar usuarios en ambas Bases de datos (externa e interna) y de logear al usuario correctamente, además de 
 mantener en todo momento las bases de datos con los mismos datos.
